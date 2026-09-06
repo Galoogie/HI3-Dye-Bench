@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HI3 Dye Bench</title>
+<!-- dye jar icon, embedded so the file stays self-contained and works offline -->
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACx0lEQVR42n1TS08TURg99047007HgQq0UUt4KcFgRQSfuHFhghtXIjv9Fy4xLvwL/gcXxg3RrQ0xvmIEI2ghNilooS2dzqPz6DD3XhdIUvHxLb+cc77vfA8J/4ncUO6ComuDnuVs/Qsj/ZGZm5OwtkYGTo/OTt+YuTE2mZ9mPBT179VvePCAolAQnXB6iE6m0iUKgJumo1SMFrGarlf5XvMBiKnFRQkA+VcHBIDY/rDNocljSe3IxPGR3PGg2rAkvqcywmql9VKzo7BAhxoBIFKpVGbo8uR8MqXqckr7pCjEzAz2nFXa7eGN96uNRt2oFFdKTwE4BxzpwEY6l8sPnM3fz1+71Og6dvTt1nrZ7dNJZjCrnTRts3LmdKapJVTVbQUzENwKgr06AHogwOVEYiKZ7r0nxWk54ujJ9ind/V2KLnl+2PJCY2t9J5kAhqMAd3dqjTdhGBUB0BgADgB2rfYqNzqyYdaqF8OddiwmCx7ocZLpSvjmbguB5/ZoMfTqsvTKcfwXv6zzWMcQY/GksnRuqn/jTFaf1jVyJHBbcn+XmraqzermZv3Lu2Jly3eddDqNVLMJCwBiAEApBefcv3P7yq2bs/nzsm/3ZlUJodVELIyQPJWB8aPfnx0dLz1/WVwuG6XnpkkghNgfINnfxd7ESCabP6H2dhOPwTa44vucGx5j9TbXA5qYymbHrw8N5MtlBPQXqdMC4Z4VUccQ3SIicR5RwQgIKIQnEHkRR6stwiBoH6zwsAAUFnEEgRCeL3ggIBwB2BxwBCIHgjMQKZR/u8ROAdq23W6alKjGKZgXQfgcwqMgLiC3FYnGU9i2bQUAIsYIIWT/lBcWFmihUBCCs8A3/BHW4ipcKvuWQMtisC2O4o+m++zz6tfHr5cebdvOKh4+pAVAkL98aArAxPzVc30qjTMwwPO59GR5ZReIPgLwOsE/AeawXmp5ynu9AAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="48x48" href="data:image/png;base64,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">
+<style>
+:root{
+  --ground:#e7e3d8; --paper:#faf8f3; --sunk:#ded9cc;
+  --ink:#1c1a14; --muted:#6b6459; --faint:#8e8677;
+  --rule:#cbc4b5; --hair:#d8d2c4;
+  --woad:#2c4573; --woad-soft:#dfe4ef;
+  --madder:#94402e; --madder-soft:#f0e0da;
+  --moss:#42562c;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  --mono:"Cascadia Mono",Consolas,"Liberation Mono","Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#15130e; --paper:#1f1c15; --sunk:#100e0a;
+    --ink:#ebe7dc; --muted:#a29889; --faint:#7a7365;
+    --rule:#38332a; --hair:#2c2820;
+    --woad:#86a6de; --woad-soft:#232b3a;
+    --madder:#ce7e68; --madder-soft:#33221c;
+    --moss:#9db97e;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15130e; --paper:#1f1c15; --sunk:#100e0a;
+  --ink:#ebe7dc; --muted:#a29889; --faint:#7a7365;
+  --rule:#38332a; --hair:#2c2820;
+  --woad:#86a6de; --woad-soft:#232b3a;
+  --madder:#ce7e68; --madder-soft:#33221c;
+  --moss:#9db97e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.6;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:0 26px 90px}
+h1,h2,h3{font-family:var(--serif); font-weight:700; text-wrap:balance; margin:0; letter-spacing:-.015em}
+p{margin:0}
+code,.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink); padding:34px 0 20px}
+.mast-top{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap}
+.mast h1{font-size:clamp(34px,5.4vw,54px); line-height:1; margin:12px 0 0}
+.mast .sub{margin-top:12px; max-width:64ch; color:var(--muted); font-size:16px}
+.themebtn{
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  background:none; border:1px solid var(--rule); color:var(--muted); padding:6px 11px; cursor:pointer;
+}
+.themebtn:hover{border-color:var(--ink); color:var(--ink)}
+:focus-visible{outline:2px solid var(--woad); outline-offset:2px}
+
+section{padding:46px 0 0}
+.sechead{display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--ink); padding-bottom:8px; margin-bottom:22px}
+.sechead h2{font-size:25px}
+.sechead .n{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.1em}
+.lede{max-width:68ch; color:var(--muted); margin-bottom:22px}
+
+/* plain-language explainer */
+.explain{background:var(--paper); border:1px solid var(--rule); padding:24px 28px; display:grid; gap:16px; max-width:76ch}
+.explain p{max-width:70ch}
+.explain .k{color:var(--ink); font-weight:600}
+
+/* mixer */
+.mixgrid{display:grid; grid-template-columns:334px minmax(0,1fr) 232px; gap:0; border:1px solid var(--rule); background:var(--paper)}
+@media(max-width:960px){.mixgrid{grid-template-columns:1fr}}
+.pane{padding:20px 22px}
+.pane+.pane{border-left:1px solid var(--hair)}
+@media(max-width:960px){.pane+.pane{border-left:none; border-top:1px solid var(--hair)}}
+.pane.result{background:var(--sunk)}
+.panetitle{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:14px}
+
+.rowlist{display:grid; gap:8px; margin-bottom:14px}
+.irow{display:grid; grid-template-columns:1fr 62px 28px; gap:8px; align-items:center}
+.sw{width:15px; height:15px; border:1px solid rgba(0,0,0,.3); flex:0 0 auto; display:inline-block}
+
+/* ingredient dropdown */
+.combo{position:relative; min-width:0}
+.combobtn{display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+  font-family:var(--mono); font-size:13px; background:var(--paper); color:var(--ink);
+  border:1px solid var(--rule); padding:4px 6px}
+.combobtn:hover{border-color:var(--ink)}
+.combobtn .nm{flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.combobtn .cv{color:var(--faint); font-size:9px}
+.combolist{position:absolute; z-index:40; top:calc(100% + 2px); left:0; right:auto;
+  min-width:100%; width:max-content; max-width:280px; max-height:288px;
+  overflow-y:auto; background:var(--paper); border:1px solid var(--ink); box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.comboopt{display:flex; align-items:center; gap:8px; padding:5px 7px; font-family:var(--mono);
+  font-size:12.5px; cursor:pointer; white-space:nowrap}
+.comboopt:hover,.comboopt.act{background:var(--woad-soft)}
+.comboopt[aria-selected=true]{font-weight:600}
+
+/* sort toggle */
+.segrow{display:flex; align-items:center; gap:9px; margin-bottom:11px; flex-wrap:wrap}
+.seglbl{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+.seg{display:flex; border:1px solid var(--rule)}
+.segbtn{font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+  background:none; border:none; color:var(--muted); padding:4px 9px}
+.segbtn+.segbtn{border-left:1px solid var(--rule)}
+.segbtn.on{background:var(--ink); color:var(--ground)}
+.swlegend{display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-size:11.5px; color:var(--faint); margin-top:11px}
+.swlegend i{display:flex; align-items:center; gap:6px; font-style:normal}
+
+input[type=text],input[type=number]{
+  font-family:var(--mono); font-size:13px; background:var(--paper); color:var(--ink);
+  border:1px solid var(--rule); padding:5px 6px; width:100%;
+}
+.btnrow{display:flex; gap:8px; flex-wrap:wrap}
+.btnrow+.btnrow{margin-top:8px}
+button{cursor:pointer}
+.xbtn{background:none; border:1px solid var(--hair); color:var(--faint); font-family:var(--mono); font-size:14px; line-height:1; padding:6px 0}
+.xbtn:hover{border-color:var(--madder); color:var(--madder)}
+.addbtn{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; background:var(--ink); color:var(--ground); border:1px solid var(--ink); padding:8px 13px}
+.addbtn:hover{background:var(--woad); border-color:var(--woad); color:#fff}
+.ghostbtn{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; background:none; color:var(--muted); border:1px solid var(--rule); padding:8px 13px}
+.ghostbtn:hover{border-color:var(--ink); color:var(--ink)}
+.addbtn[disabled],.ghostbtn[disabled]{opacity:.55; cursor:default}
+.addbtn[disabled]:hover{background:var(--ink); border-color:var(--ink); color:var(--ground)}
+.ghostbtn[disabled]:hover{border-color:var(--rule); color:var(--muted)}
+
+#wheel{width:100%; height:auto; display:block; max-width:360px; margin:0 auto}
+.wheelnote{font-size:12.5px; color:var(--faint); text-align:center; margin-top:8px; font-family:var(--mono)}
+
+.bigswatch{width:100%; aspect-ratio:4/3; border:1px solid rgba(0,0,0,.32); margin-bottom:12px}
+.readout{display:grid; gap:6px}
+.readout div{display:flex; justify-content:space-between; gap:8px; font-family:var(--mono); font-size:12.5px; border-bottom:1px dotted var(--hair); padding-bottom:5px}
+.readout .k{color:var(--faint); text-transform:uppercase; font-size:10px; letter-spacing:.07em; align-self:center}
+.readout .v{font-weight:600}
+.hexbig{font-family:var(--mono); font-size:20px; font-weight:600; letter-spacing:.02em; text-align:center; margin-bottom:10px}
+
+/* live working */
+.working{border:1px solid var(--rule); background:var(--paper); margin-top:18px; padding:20px 24px}
+.wstep{display:grid; grid-template-columns:104px 1fr; gap:16px; padding:12px 0; border-bottom:1px solid var(--hair)}
+.wstep:last-child{border-bottom:none}
+.wstep .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); padding-top:3px}
+.wstep .body{font-family:var(--mono); font-size:13px; line-height:1.85}
+.wstep .body .plain{font-family:var(--sans); color:var(--muted); font-size:13.5px; line-height:1.6}
+.arrow{display:grid; grid-template-columns:13px 1fr; gap:9px; align-items:baseline}
+.adot{width:9px; height:9px; border:1px solid rgba(0,0,0,.3); align-self:center}
+.hl{color:var(--woad); font-weight:600}
+.hl-warn{color:var(--madder); font-weight:600}
+
+/* formulas */
+.mathgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; grid-auto-rows:1fr}
+.mcard.wide{margin-bottom:14px}
+.eq.inline{display:flex; flex-wrap:wrap; gap:4px 26px}
+@media(max-width:900px){.mathgrid{grid-template-columns:1fr}}
+.mcard{border:1px solid var(--rule); background:var(--paper); padding:15px 18px}
+.mcard .mlbl{margin-bottom:7px}
+.twocol{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:start}
+@media(max-width:900px){.twocol{grid-template-columns:1fr}}
+.mlbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); padding-top:3px}
+.eq{font-family:var(--mono); font-size:13.5px; line-height:1.9; overflow-x:auto}
+.eq b{color:var(--woad); font-weight:600}
+.mnote{font-size:13.5px; color:var(--muted); margin-top:6px; max-width:66ch}
+h3.sub3{font-size:18px; margin:26px 0 12px}
+
+/* finder: ingredient filter, verdict */
+.filterhead{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px}
+.filterpanel{border:1px solid var(--rule); background:var(--paper); padding:14px 16px; margin-bottom:16px}
+.filgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px 14px; margin-top:12px}
+.fillab{display:flex; align-items:center; gap:7px; font-size:12.5px; font-family:var(--mono); padding:3px 0; cursor:pointer}
+.fillab input{width:auto; margin:0}
+.fillab.off{color:var(--faint)}
+.fillab.off .sw{opacity:.3}
+.verdict{border-left:3px solid var(--madder); background:var(--madder-soft); padding:12px 16px; margin-bottom:16px; font-size:13.5px}
+.verdict.ok{border-left-color:var(--woad); background:var(--woad-soft)}
+.verdict b{font-weight:600}
+td.num .dash,.dash{color:var(--faint)}
+.findbar{display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; margin-bottom:18px}
+.field{display:grid; gap:5px}
+.field label{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint)}
+.field input{width:128px}
+.field.narrow input{width:78px}
+.peek{width:44px; height:36px; border:1px solid var(--rule)}
+.tablewrap{overflow-x:auto; border:1px solid var(--rule); background:var(--paper)}
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+th{font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint);
+   text-align:left; font-weight:500; padding:10px 12px; border-bottom:1px solid var(--rule); background:var(--sunk); white-space:nowrap}
+td{padding:8px 12px; border-bottom:1px solid var(--hair); vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr.pick{cursor:pointer}
+tbody tr.pick:hover{background:var(--woad-soft)}
+td.num{font-family:var(--mono); text-align:right; font-variant-numeric:tabular-nums}
+td.mono{font-family:var(--mono)}
+.tswatch{width:30px; height:18px; border:1px solid rgba(0,0,0,.28); display:block}
+.tag{font-family:var(--mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; padding:2px 6px; border:1px solid currentColor; white-space:nowrap}
+.tag.exact{color:var(--moss)} .tag.close{color:var(--woad)} .tag.near{color:var(--faint)}
+.hint{font-size:12.5px; color:var(--faint); margin-top:10px}
+footer{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); color:var(--faint); font-size:12.5px; max-width:78ch}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="mast-top">
+    <div class="eyebrow">Horse Isle 3 &middot; Infinite Wilds</div>
+    <button class="themebtn" id="themebtn" type="button">Theme</button>
+  </div>
+  <h1>The Dye Bench</h1>
+  <p class="sub">Experiment with ingredients before you spend the resources, or start from the desired color and find a recipe.</p>
+</header>
+
+<section id="how">
+  <div class="sechead"><span class="n">01</span><h2>How the game mixes dye</h2></div>
+  <div class="explain">
+    <p>Picture a standard color wheel. Every ingredient is a push in one direction on that wheel. Raspberry pushes toward red, Blueberry toward blue, Kelp toward green.</p>
+    <p>Two things decide how hard an ingredient pushes: how <span class="k">strong</span> it is, and <span class="k">how many</span> you put in. Raspberry is strong and pushes 10 per unit; Dandelion is faint and pushes 5 per unit. Ten Raspberry pushes with a force of 100, while ten Dandelion only push with a force of 50.</p>
+    <p>So you mix two ingredients together, lets say five Lotus Flower and five Blueberry. Neither add darkening, so you should get a nice, vivid green! But you don’t. You get an ugly, muddy grey. <span class="k">Why?</span></p>
+    <p>What makes predicting a mix of ingredients difficult is how opposites react to each other. A push that cancels out doesn't just vanish: it comes off the <span class="k">total brightness</span>. Mix two strong colors from opposite sides of the wheel and most of their force is spent fighting each other, so what you get is not a bright color in between. It is mud. The harder they fight, the darker it gets. In the example of the Lotus Flower and Blueberry, they are almost exactly opposite of each other on the color wheel, producing a muddy grey.</p>
+    <p>Finally, some ingredients <span class="k">darken</span> on their own, no matter what else is in the pot. Acorn, Coal, Blackberry and Black Nightshade are the obvious ones, but plenty of colored ingredients darken too. Enough of any of them turns the dye black.</p>
+  </div>
+</section>
+
+<section id="mixer">
+  <div class="sechead"><span class="n">02</span><h2>Mixer</h2></div>
+  <p class="lede">Add ingredients and amounts. The wheel and the formula below both update as you go, so you can see where the color comes from.</p>
+
+  <div class="mixgrid">
+    <div class="pane">
+      <div class="panetitle">Recipe</div>
+      <div class="segrow">
+        <span class="seglbl">Order</span>
+        <div class="seg" role="group" aria-label="Ingredient order">
+          <button class="segbtn on" type="button" data-sortmode="name">A&ndash;Z</button>
+          <button class="segbtn" type="button" data-sortmode="hue">By hue</button>
+        </div>
+      </div>
+      <div class="rowlist" id="mixrows"></div>
+      <div class="btnrow">
+        <button class="addbtn" id="addrow" type="button">Add ingredient</button>
+        <button class="ghostbtn" id="clearrows" type="button">Clear All</button>
+      </div>
+      <div class="btnrow">
+        <button class="ghostbtn" id="addrandom" type="button">Add random ingredient</button>
+      </div>
+      <div class="swlegend">
+        <i><span class="sw" id="lgA"></span>color</i>
+        <i><span class="sw" id="lgB"></span>color + darkening</i>
+        <i><span class="sw" id="lgC"></span>darkening only</i>
+      </div>
+    </div>
+    <div class="pane">
+      <div class="panetitle">The wheel</div>
+      <svg id="wheel" viewBox="0 0 340 340" role="img" aria-label="Colour wheel showing each ingredient as an arrow and their total"></svg>
+      <div class="wheelnote" id="wheelnote"></div>
+    </div>
+    <div class="pane result">
+      <div class="panetitle">Result</div>
+      <div class="bigswatch" id="mixswatch"></div>
+      <div class="hexbig" id="mixhex">&mdash;</div>
+      <div class="readout" id="mixreadout"></div>
+    </div>
+  </div>
+
+  <div class="working" id="working"></div>
+</section>
+
+<section id="finder">
+  <div class="sechead"><span class="n">03</span><h2>Color finder</h2></div>
+  <p class="lede">Give it the color you want. It tries every combination up to the number of different ingredients you allow, darkeners included, and picks a darkener to perfect the brightness. Three is the useful default: two colors and something to darken them. Click any row to load it into the mixer.</p>
+  <div class="findbar">
+    <div class="field">
+      <label for="target">Target hex</label>
+      <input type="text" id="target" value="#7a4b8c" spellcheck="false" autocomplete="off">
+    </div>
+    <div class="peek" id="peek"></div>
+    <div class="field narrow">
+      <label for="maxcol">Max ingredients</label>
+      <input type="number" id="maxcol" value="3" min="1" max="5">
+    </div>
+    <div class="field narrow">
+      <label for="maxunits">Max each</label>
+      <input type="number" id="maxunits" value="20" min="1" max="50">
+    </div>
+    <button class="addbtn" id="findbtn" type="button">Find recipes</button>
+    <button class="ghostbtn" id="randhex" type="button">Random color</button>
+  </div>
+  <div class="filterhead">
+    <button class="ghostbtn" id="filtertoggle" type="button" aria-expanded="false">Limit to ingredients I have</button>
+    <span class="hint" id="filtercount" style="margin-top:0"></span>
+  </div>
+  <div class="filterpanel" id="filterpanel" hidden>
+    <div class="segrow" style="margin-bottom:0">
+      <span class="seglbl">Select</span>
+      <div class="seg">
+        <button class="segbtn" type="button" data-fil="all">All</button>
+        <button class="segbtn" type="button" data-fil="none">None</button>
+        <button class="segbtn" type="button" data-fil="colour">Colors only</button>
+      </div>
+    </div>
+    <div class="filgrid" id="filgrid"></div>
+  </div>
+  <div id="verdict"></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="width:52px"></th><th>Recipe</th><th style="width:92px">Result</th><th style="width:70px" class="num">Units</th><th style="width:94px">Match</th></tr></thead>
+      <tbody id="findbody"></tbody>
+    </table>
+  </div>
+  <p class="hint" id="findnote"></p>
+</section>
+
+<section id="formulas">
+  <div class="sechead"><span class="n">04</span><h2>The exact formulas</h2></div>
+  <p class="lede">Everything above comes from these five steps. They are written out in full so you can check the arithmetic by hand, or build your own tool from them.</p>
+
+  <div class="mcard wide">
+    <div class="mlbl">Constants</div>
+    <div class="eq inline"><span>ingredient <b>i</b> has hue <b>H&#7522;</b></span><span>saturation per unit <b>s&#7522;</b></span><span>darkening per unit <b>d&#7522;</b></span></div>
+    <div class="mnote">Three fixed numbers per ingredient and nothing else. They are listed in the table below. <b>n&#7522;</b> is how many of that ingredient you put in.</div>
+  </div>
+
+  <div class="mathgrid">
+    <div class="mcard">
+      <div class="mlbl">1 &middot; Weights</div>
+      <div class="eq"><b>w&#7522;</b> = s&#7522; &times; n&#7522;</div>
+      <div class="mnote">How hard this ingredient pushes: its strength times how many you used.</div>
+    </div>
+    <div class="mcard">
+      <div class="mlbl">2 &middot; Vector sum</div>
+      <div class="eq"><b>x</b> = &Sigma; w&#7522; &middot; cos(H&#7522;)<br><b>y</b> = &Sigma; w&#7522; &middot; sin(H&#7522;)</div>
+      <div class="mnote">Each ingredient becomes an arrow of length w&#7522; pointing at its own hue. Add the arrows.</div>
+    </div>
+    <div class="mcard">
+      <div class="mlbl">3 &middot; Hue</div>
+      <div class="eq"><b>H</b> = atan2(y, x)<br>&rarr; degrees, add 360 if negative</div>
+      <div class="mnote">The direction the combined arrow points. Darkening never touches this.</div>
+    </div>
+    <div class="mcard">
+      <div class="mlbl">4 &middot; Saturation</div>
+      <div class="eq"><b>S</b> = min(100, &radic;(x&sup2; + y&sup2;))</div>
+      <div class="mnote">The length of the combined arrow, capped at 100.</div>
+    </div>
+  </div>
+
+  <div class="mcard wide" style="margin-top:14px; margin-bottom:0">
+    <div class="mlbl">5 &middot; Value</div>
+    <div class="eq"><b>V</b> = base &minus; (&Sigma; w&#7522; &minus; &radic;(x&sup2; + y&sup2;)) &minus; &Sigma; d&#7522;n&#7522;<br>clamped to 0&ndash;100<br>base = 100, or <b>99</b> when &Sigma; w&#7522; = 0</div>
+    <div class="mnote">Start at 100. Subtract the push that cancelled out; everything you added minus what survived. Then subtract every ingredient's darkening. The base drops to 99 when nothing in the pot has a hue, which is why pure greys land one step darker than the arithmetic suggests.</div>
+  </div>
+
+  <h3 class="sub3">Ingredient constants</h3>
+  <div class="segrow">
+    <span class="seglbl">Order</span>
+    <div class="seg" role="group" aria-label="Ingredient order">
+      <button class="segbtn on" type="button" data-sortmode="name">A&ndash;Z</button>
+      <button class="segbtn" type="button" data-sortmode="hue">By hue</button>
+    </div>
+    <span class="seglbl" style="margin-left:6px">H&#7522; hue &middot; s&#7522; sat/unit &middot; d&#7522; darken/unit</span>
+  </div>
+  <div class="twocol">
+    <div class="tablewrap"><table><thead><tr><th style="width:40px">Pure</th><th>Ingredient</th><th class="num" style="width:52px">H&#7522;</th><th class="num" style="width:48px">s&#7522;</th><th class="num" style="width:48px">d&#7522;</th></tr></thead><tbody id="constbodyA"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th style="width:40px">Pure</th><th>Ingredient</th><th class="num" style="width:52px">H&#7522;</th><th class="num" style="width:48px">s&#7522;</th><th class="num" style="width:48px">d&#7522;</th></tr></thead><tbody id="constbodyB"></tbody></table></div>
+  </div>
+  <p class="hint">A grey dash means the ingredient has no hue at all. It contributes nothing to steps 2, 3 and 4, and only removes brightness in step 5.</p>
+</section>
+
+<footer>
+  Built from over 1,500 dye recipes recorded on the Horse Isle 3 wiki.<br>Built with Claude AI.
+</footer>
+</div>
+
+<script>
+"use strict";
+/* ---- constants: [hue, saturation per unit, darkening per unit] ---- */
+var ING = {
+ "Acorn":[0,0,2], "Aridberry":[270,10,5], "Basil":[111,10,5], "Beet":[348,10,5],
+ "Bird of Paradise":[336,5,0], "Black Nightshade Flower":[0,0,5], "Blackberry":[0,0,10],
+ "Blueberry":[240,10,0], "Bluebonnet Flower":[230,5,0], "Carrot":[27,10,5],
+ "Cineraria Flower":[210,5,0], "Cloudberry":[30,10,5], "Coal":[0,0,20], "Cranberry":[7,10,5],
+ "Crystal Flower":[190,10,0], "Dandelion":[55,5,0], "Desert Rose":[25,5,0],
+ "Dragonblood Sap":[2,50,10], "Fire Flower":[345,10,0], "Frangipanis Flower":[310,2,0],
+ "Gerbera Daisy":[43,5,0], "Grape Bundle":[335,10,5], "Hellebore Flower":[100,5,0],
+ "Iceberry":[180,10,5], "Kelp":[106,10,5], "Lemon":[60,10,5], "Liatris Flower":[280,5,0],
+ "Lime":[80,10,5], "Lotus Flower":[63,7,0], "Mango":[57,10,5], "Mint":[122,10,5],
+ "Morel Mushroom":[41,3,2], "Mulberry":[290,7,7], "Mullein Flower":[47,5,0],
+ "Olive":[72,2,2], "Oozeberry":[130,10,5], "Orange":[33,10,5], "Pansy":[165,5,0],
+ "Pimpernel Flower":[15,5,0], "Pineapple":[52,10,5], "Pink Zinnia":[320,5,0],
+ "Plum":[285,10,5], "Poppy":[38,5,0], "Raspberry":[0,10,0], "Red Rose":[355,5,0],
+ "Saffron":[32,5,0], "Seaberry":[65,10,5], "Spiderwort Flower":[263,5,0], "Spinach":[115,10,10],
+ "Star Flower":[200,5,0], "Strawberry":[5,10,5], "Sulfur":[51,5,0], "Water Iris":[300,5,0]
+};
+var NAMES = Object.keys(ING).sort();
+var COLOURED = NAMES.filter(function(n){ return ING[n][1] > 0; });
+var DARKENERS = NAMES.filter(function(n){ return ING[n][1] === 0 && ING[n][2] > 0; });
+var RAD = Math.PI/180;
+var COS = {}, SIN = {};
+NAMES.forEach(function(n){ COS[n] = Math.cos(ING[n][0]*RAD); SIN[n] = Math.sin(ING[n][0]*RAD); });
+
+/* ---- the model ---- */
+function mixHSV(counts){
+  var x=0, y=0, total=0, dark=0;
+  for (var name in counts){
+    if (!Object.prototype.hasOwnProperty.call(counts,name)) continue;
+    var n = counts[name]; if (!n || !ING[name]) continue;
+    var w = ING[name][1]*n;
+    total += w; dark += ING[name][2]*n;
+    x += w*COS[name]; y += w*SIN[name];
+  }
+  var mag = Math.hypot(x,y);
+  var H = Math.atan2(y,x)/RAD; if (H < 0) H += 360;
+  // 99 only when nothing in the pot has a hue. Coloured ingredients that cancel
+  // each other exactly still start at 100 — confirmed in game on six pairs.
+  var base = total > 0 ? 100 : 99;
+  return {
+    H:H, S:Math.min(100,mag), V:Math.max(0,Math.min(100, base-(total-mag)-dark)),
+    mag:mag, total:total, lost:total-mag, dark:dark, base:base
+  };
+}
+function hsv2rgb(H,S,V){
+  var s=S/100, v=V/100, hh=((H%360)+360)%360;
+  var i=Math.floor(hh/60), f=hh/60-i;
+  var p=v*(1-s), q=v*(1-s*f), t=v*(1-s*(1-f));
+  var tab=[[v,t,p],[q,v,p],[p,v,t],[p,q,v],[t,p,v],[v,p,q]][i];
+  return tab.map(function(c){ return Math.floor(c*255+0.5+1e-9); });
+}
+function hx2(n){ return n.toString(16).padStart(2,"0"); }
+function toHex(rgb){ return "#"+rgb.map(hx2).join(""); }
+function mixHex(counts){ var m=mixHSV(counts); return toHex(hsv2rgb(m.H,m.S,m.V)); }
+function pureHex(name){ return toHex(hsv2rgb(ING[name][0],100,100)); }
+function parseHex(str){
+  var s=(str||"").trim().replace(/^#/,"");
+  if (/^[0-9a-fA-F]{3}$/.test(s)) s=s.split("").map(function(c){return c+c;}).join("");
+  if (!/^[0-9a-fA-F]{6}$/.test(s)) return null;
+  return [0,2,4].map(function(i){ return parseInt(s.substr(i,2),16); });
+}
+function rgb2hsv(r,g,b){
+  var mx=Math.max(r,g,b), mn=Math.min(r,g,b), d=mx-mn, h=0;
+  if (d){ if (mx===r) h=60*(((g-b)/d)%6); else if (mx===g) h=60*(((b-r)/d)+2); else h=60*(((r-g)/d)+4); }
+  if (h<0) h+=360;
+  return {H:h, S: mx ? 100*d/mx : 0, V: 100*mx/255};
+}
+function dist(a,b){
+  var rm=(a[0]+b[0])/2, dr=a[0]-b[0], dg=a[1]-b[1], db=a[2]-b[2];
+  return Math.sqrt((2+rm/256)*dr*dr + 4*dg*dg + (2+(255-rm)/256)*db*db);
+}
+
+/* ---- mixer state ---- */
+var rows = [
+  {name:"Cineraria Flower", n:6},
+  {name:"Iceberry", n:2},
+  {name:"Pansy", n:4}
+];
+function counts(){
+  var c={};
+  rows.forEach(function(r){ if (r.n>0) c[r.name]=(c[r.name]||0)+r.n; });
+  return c;
+}
+/* solid = colour only · striped = colour that also darkens · grey stripes = darkening only */
+function swatchCSS(name){
+  var c = ING[name];
+  if (!c[1]) return "repeating-linear-gradient(45deg,#8d8d8d,#8d8d8d 3px,#d0d0d0 3px,#d0d0d0 6px)";
+  var pure = pureHex(name);
+  if (!c[2]) return pure;
+  var dk = toHex(hsv2rgb(c[0],100,42));
+  return "repeating-linear-gradient(45deg,"+pure+","+pure+" 3px,"+dk+" 3px,"+dk+" 6px)";
+}
+var sortMode = "name";
+function orderedNames(){
+  var a = NAMES.slice();
+  if (sortMode === "name") return a.sort();
+  return a.sort(function(x,y){                    // by hue, hueless ingredients last
+    var cx = ING[x], cy = ING[y];
+    if (cx[1] && !cy[1]) return -1;
+    if (!cx[1] && cy[1]) return 1;
+    if (!cx[1] && !cy[1]) return x.localeCompare(y);
+    return (cx[0] - cy[0]) || x.localeCompare(y);
+  });
+}
+function renderRows(){
+  var order = orderedNames();
+  document.getElementById("mixrows").innerHTML = rows.map(function(r,i){
+    var opts = order.map(function(n){
+      return '<div class="comboopt" role="option" data-name="'+n+'" aria-selected="'+(n===r.name)+'">'
+           + '<span class="sw" style="background:'+swatchCSS(n)+'"></span>'+n+"</div>";
+    }).join("");
+    return '<div class="irow">'
+      + '<div class="combo" data-i="'+i+'">'
+      +   '<button type="button" class="combobtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Ingredient '+(i+1)+': '+r.name+'">'
+      +     '<span class="sw" style="background:'+swatchCSS(r.name)+'"></span>'
+      +     '<span class="nm">'+r.name+'</span><span class="cv">&#9660;</span></button>'
+      +   '<div class="combolist" role="listbox" hidden>'+opts+"</div>"
+      + "</div>"
+      + '<input type="number" min="1" max="99" value="'+r.n+'" data-i="'+i+'" data-k="n" aria-label="Amount of '+r.name+'">'
+      + '<button class="xbtn" type="button" data-del="'+i+'" aria-label="Remove '+r.name+'">&times;</button>'
+      + "</div>";
+  }).join("");
+  update();
+}
+function closeCombos(){
+  [].forEach.call(document.querySelectorAll(".combolist"), function(l){
+    if (!l.hidden){ l.hidden = true; l.previousElementSibling.setAttribute("aria-expanded","false"); }
+  });
+}
+
+/* ---- the wheel, redrawn from the current recipe ---- */
+function drawWheel(m, c){
+  var svg=document.getElementById("wheel");
+  var cx=170, cy=170, rOut=160, rIn=149, R100=126;
+  function pt(deg,len){ return [cx+len*Math.cos(deg*RAD), cy-len*Math.sin(deg*RAD)]; }
+  var out="";
+  for (var a=0; a<360; a+=4){
+    var p1=pt(a,rIn), p2=pt(a,rOut), p3=pt(a+4.4,rOut), p4=pt(a+4.4,rIn);
+    out += '<path d="M'+p1[0].toFixed(1)+" "+p1[1].toFixed(1)+"L"+p2[0].toFixed(1)+" "+p2[1].toFixed(1)
+        +  "L"+p3[0].toFixed(1)+" "+p3[1].toFixed(1)+"L"+p4[0].toFixed(1)+" "+p4[1].toFixed(1)
+        +  'Z" fill="'+toHex(hsv2rgb(a+2,100,100))+'"/>';
+  }
+  var arrows=[];
+  for (var name in c){
+    if (!Object.prototype.hasOwnProperty.call(c,name)) continue;
+    if (!ING[name][1]) continue;
+    arrows.push({name:name, len:ING[name][1]*c[name], deg:ING[name][0], col:pureHex(name)});
+  }
+  var longest = 100;
+  arrows.forEach(function(a){ if (a.len>longest) longest=a.len; });
+  if (m.mag>longest) longest=m.mag;
+  var scale = R100/longest;
+
+  // reference rings at 50 and 100 so short arrows are still readable
+  [50,100].forEach(function(v){
+    var r = v*scale;
+    out += '<circle cx="'+cx+'" cy="'+cy+'" r="'+r.toFixed(1)+'" fill="none" stroke="var(--hair)" stroke-width="1" stroke-dasharray="2 4"/>'
+        +  '<text x="'+(cx+4)+'" y="'+(cy-r+9).toFixed(1)+'" font-family="Consolas,monospace" font-size="9" fill="var(--faint)">'+v+"</text>";
+  });
+  function arrow(deg,len,col,w){
+    var tip=pt(deg,len*scale);
+    var s='<line x1="'+cx+'" y1="'+cy+'" x2="'+tip[0].toFixed(1)+'" y2="'+tip[1].toFixed(1)
+        + '" stroke="'+col+'" stroke-width="'+w+'" stroke-linecap="round"/>';
+    var back=pt(deg,len*scale-7), perp=deg+90;
+    var l=[back[0]+4*Math.cos(perp*RAD), back[1]-4*Math.sin(perp*RAD)];
+    var r=[back[0]-4*Math.cos(perp*RAD), back[1]+4*Math.sin(perp*RAD)];
+    s += '<path d="M'+tip[0].toFixed(1)+" "+tip[1].toFixed(1)+"L"+l[0].toFixed(1)+" "+l[1].toFixed(1)
+      +  "L"+r[0].toFixed(1)+" "+r[1].toFixed(1)+'Z" fill="'+col+'"/>';
+    return s;
+  }
+  arrows.forEach(function(a){ if (a.len*scale > 9) out += arrow(a.deg,a.len,a.col,2); });
+  if (m.mag*scale > 9) out += arrow(m.H, m.mag, "var(--ink)", 3);
+  out += '<circle cx="'+cx+'" cy="'+cy+'" r="2.6" fill="var(--ink)"/>';
+  svg.innerHTML = out;
+
+  var note;
+  if (!Object.keys(c).length) note = "nothing added yet";
+  else if (!arrows.length) note = "no colored ingredient · greys only";
+  else if (arrows.length === 1) note = "one arrow, nothing to cancel";
+  else note = "thick arrow = the total · rings mark 50 and 100 saturation";
+  document.getElementById("wheelnote").textContent = note;
+}
+
+/* ---- the live working ---- */
+function fmt(x){ return (Math.round(x*10)/10).toString(); }
+function renderWorking(m, c){
+  var names = Object.keys(c).sort();
+  if (!names.length){
+    document.getElementById("working").innerHTML =
+      '<div class="wstep"><div class="lbl">Empty</div><div class="body"><span class="plain">Add an ingredient to see the formula working.</span></div></div>';
+    return;
+  }
+  var coloured = names.filter(function(n){ return ING[n][1] > 0; });
+  var greys = names.filter(function(n){ return ING[n][1] === 0; });
+
+  var s1 = coloured.map(function(n){
+    return '<div class="arrow"><span class="adot" style="background:'+pureHex(n)+'"></span><span>'
+      + c[n] + " × " + n + " — strength " + c[n] + "×" + ING[n][1] + " = <span class=\"hl\">"
+      + (ING[n][1]*c[n]) + "</span> pointing at " + ING[n][0] + "°</span></div>";
+  }).join("");
+  if (!coloured.length) s1 = '<span class="plain">Nothing colored in this recipe, so there are no arrows at all.</span>';
+
+  var s2;
+  if (!coloured.length){
+    s2 = '<span class="plain">No arrows to add. The dye stays grey.</span>';
+  } else if (coloured.length === 1){
+    s2 = "One arrow, so the total is just itself: saturation <span class=\"hl\">" + fmt(m.mag)
+       + "</span> at <span class=\"hl\">" + fmt(m.H) + "°</span>";
+  } else {
+    s2 = "Add them together → saturation <span class=\"hl\">" + fmt(m.mag)
+       + "</span> at <span class=\"hl\">" + fmt(m.H) + "°</span><br>"
+       + '<span class="plain">You put in a total of ' + fmt(m.total) + " saturation (push), but only " + fmt(m.mag)
+       + " survives · the arrows were pulling against each other, so "
+       + (m.lost < 0.05 ? "almost none" : "<b>" + fmt(m.lost) + "</b>") + " cancelled out.</span>";
+  }
+
+  var s3 = "hue = <span class=\"hl\">" + fmt(m.H) + "°</span><br>saturation = "
+    + (m.mag > 100
+        ? "<span class=\"hl\">100</span> <span class=\"plain\">(The arrow is " + fmt(m.mag) + " long, but 100 is the most the game allows)</span>"
+        : "<span class=\"hl\">" + fmt(m.S) + "</span>");
+
+  var vparts = "value = " + m.base;
+  if (m.lost > 0.05) vparts += " &minus; " + fmt(m.lost) + " <span class=\"plain\">(cancelled)</span>";
+  if (m.dark > 0){
+    vparts += " &minus; " + fmt(m.dark) + " <span class=\"plain\">(darkening from "
+      + names.filter(function(n){ return ING[n][2] > 0; }).join(", ") + ")</span>";
+  }
+  var raw = m.base - m.lost - m.dark;
+  vparts += " = <span class=\"" + (raw < 0 ? "hl-warn" : "hl") + "\">" + fmt(m.V) + "</span>";
+  if (raw < 0) vparts += ' <span class="plain">· That is below zero, so the dye comes out pure black.</span>';
+  if (m.base === 99) vparts += '<br><span class="plain">Starts from 99 rather than 100 because nothing in the pot has a color.</span>';
+
+  var hexNow = toHex(hsv2rgb(m.H,m.S,m.V));
+  document.getElementById("working").innerHTML =
+      '<div class="wstep"><div class="lbl">1 &middot; Arrows</div><div class="body">'+s1+"</div></div>"
+    + '<div class="wstep"><div class="lbl">2 &middot; Add them</div><div class="body">'+s2+"</div></div>"
+    + '<div class="wstep"><div class="lbl">3 &middot; Read off</div><div class="body">'+s3+"<br>"+vparts+"</div></div>"
+    + '<div class="wstep"><div class="lbl">4 &middot; color</div><div class="body">'
+      + '<span class="adot" style="display:inline-block;width:13px;height:13px;vertical-align:-2px;background:'
+      + hexNow + '"></span> <span class="hl" style="font-size:15px">' + hexNow + "</span></div></div>";
+}
+
+function update(){
+  var c = counts(), m = mixHSV(c), any = Object.keys(c).length > 0;
+  var hex = toHex(hsv2rgb(m.H,m.S,m.V));
+  document.getElementById("mixswatch").style.background = any ? hex : "var(--ground)";
+  document.getElementById("mixhex").textContent = any ? hex : "—";
+  document.getElementById("mixreadout").innerHTML = any
+    ? '<div><span class="k">Hue</span><span class="v">'+fmt(m.H)+"°</span></div>"
+    + '<div><span class="k">Saturation</span><span class="v">'+fmt(m.S)+"</span></div>"
+    + '<div><span class="k">Value</span><span class="v">'+fmt(m.V)+"</span></div>"
+    + '<div><span class="k">Push added</span><span class="v">'+fmt(m.total)+"</span></div>"
+    + '<div><span class="k">Cancelled</span><span class="v">'+fmt(m.lost)+"</span></div>"
+    + '<div><span class="k">Darkening</span><span class="v">'+fmt(m.dark)+"</span></div>"
+    + '<div><span class="k">Total units</span><span class="v">'+rows.reduce(function(a,r){return a+(r.n||0);},0)+"</span></div>"
+    : '<div><span class="k">Nothing yet</span><span class="v">—</span></div>';
+  drawWheel(m, c);
+  renderWorking(m, c);
+}
+
+document.getElementById("mixrows").addEventListener("input", function(e){
+  var t=e.target, i=t.getAttribute("data-i");
+  if (i === null || t.getAttribute("data-k") !== "n") return;
+  var v = parseInt(t.value,10);
+  rows[i].n = isNaN(v) ? 0 : Math.max(0, Math.min(99,v));
+  update();
+});
+document.getElementById("mixrows").addEventListener("click", function(e){
+  var del = e.target.closest("[data-del]");
+  if (del){ rows.splice(parseInt(del.getAttribute("data-del"),10),1); renderRows(); return; }
+  var btn = e.target.closest(".combobtn");
+  if (btn){
+    var list = btn.nextElementSibling, wasOpen = !list.hidden;
+    closeCombos();
+    if (!wasOpen){
+      list.hidden = false; btn.setAttribute("aria-expanded","true");
+      var sel = list.querySelector('[aria-selected="true"]');
+      if (sel) sel.scrollIntoView({block:"center"});
+    }
+    return;
+  }
+  var opt = e.target.closest(".comboopt");
+  if (opt){
+    rows[opt.closest(".combo").getAttribute("data-i")].name = opt.getAttribute("data-name");
+    closeCombos(); renderRows();
+  }
+});
+document.addEventListener("click", function(e){ if (!e.target.closest(".combo")) closeCombos(); });
+document.addEventListener("keydown", function(e){
+  var open = document.querySelector(".combolist:not([hidden])");
+  if (!open) return;
+  var opts = [].slice.call(open.querySelectorAll(".comboopt"));
+  var cur = open.querySelector(".comboopt.act") || open.querySelector('[aria-selected="true"]');
+  var idx = opts.indexOf(cur);
+  function mark(j){
+    opts.forEach(function(o){ o.classList.remove("act"); });
+    opts[j].classList.add("act"); opts[j].scrollIntoView({block:"nearest"});
+  }
+  if (e.key === "Escape"){ e.preventDefault(); closeCombos(); return; }
+  if (e.key === "ArrowDown" || e.key === "ArrowUp"){
+    e.preventDefault();
+    mark(Math.max(0, Math.min(opts.length-1, (idx<0?0:idx) + (e.key==="ArrowDown"?1:-1))));
+    return;
+  }
+  if (e.key === "Enter"){ e.preventDefault(); if (idx>=0) opts[idx].click(); return; }
+  if (/^[a-zA-Z]$/.test(e.key)){
+    for (var j=0;j<opts.length;j++){
+      if (opts[j].getAttribute("data-name").charAt(0).toLowerCase() === e.key.toLowerCase()){ mark(j); return; }
+    }
+  }
+});
+document.getElementById("addrow").onclick = function(){ rows.push({name:"Dandelion", n:5}); renderRows(); };
+document.getElementById("addrandom").onclick = function(){
+  var used = {};
+  rows.forEach(function(r){ used[r.name] = 1; });
+  var pool = NAMES.filter(function(n){ return !used[n]; });
+  if (!pool.length) pool = NAMES;                     // every ingredient already in — allow a repeat
+  var pick = pool[Math.floor(Math.random()*pool.length)];
+  rows.push({name:pick, n:1 + Math.floor(Math.random()*10)});
+  renderRows();
+};
+document.getElementById("clearrows").onclick = function(){ rows = []; renderRows(); };
+
+/* ---- finder ---- */
+/* ---------------------------------------------------------------
+   Is a colour reachable at all?
+
+   V = 100 - (Sw - mag) - S d.n  and  n = w/s, so with k = d/s
+       V = 100 + S - S w(1+k)
+   Maximising V means minimising S w(1+k) subject to the vectors summing
+   to S at hue H, with every w >= 0. That is a linear programme with two
+   equality constraints, so an optimal solution never needs more than two
+   ingredients — which makes it exact and cheap to solve by trying pairs.
+   Counts are really integers, so this is an upper bound: if the target
+   value is above it, no recipe can reach the colour.
+------------------------------------------------------------------ */
+function maxValue(H, S){
+  if (S <= 0.5){                                  // a pure grey: two routes to it
+    var best = -1;
+    DARKENERS.forEach(function(dk){                // colourless ingredient on its own
+      if (AVAIL[dk]) best = Math.max(best, 99 - ING[dk][2]);
+    });
+    var col = COLOURED.filter(function(n){ return AVAIL[n]; });
+    for (var a=0;a<col.length;a++) for (var bq=a+1;bq<col.length;bq++){
+      var A=col[a], B=col[bq];
+      var gap = Math.abs(ING[A][0]-ING[B][0]) % 360;
+      if (Math.min(gap,360-gap) !== 180) continue;  // only exact opposites cancel
+      var sa=ING[A][1], sb=ING[B][1], g=(function(u,v){while(v){var w=u%v;u=v;v=w;}return u;})(sa,sb);
+      var na=sb/g, nb=sa/g;                         // smallest counts with equal push
+      best = Math.max(best, 100 - (sa*na + sb*nb) - (ING[A][2]*na + ING[B][2]*nb));
+    }
+    return best;
+  }
+  var th = H*RAD, tx = S*Math.cos(th), ty = S*Math.sin(th), best = Infinity;
+  var pool = COLOURED.filter(function(n){ return AVAIL[n]; });
+  for (var i=0;i<pool.length;i++){
+    var A=pool[i], ax=COS[A], ay=SIN[A], ca=1+ING[A][2]/ING[A][1];
+    if (Math.abs(ax*ty - ay*tx) < 1e-9 && (ax*tx + ay*ty) > 0)
+      best = Math.min(best, Math.hypot(tx,ty)*ca);        // hue sits exactly on this ingredient
+    for (var j=i+1;j<pool.length;j++){
+      var B=pool[j], bx=COS[B], by=SIN[B], cb=1+ING[B][2]/ING[B][1];
+      var det = ax*by - ay*bx;
+      if (Math.abs(det) < 1e-9) continue;
+      var wa = (tx*by - ty*bx)/det, wb = (ax*ty - ay*tx)/det;
+      if (wa < -1e-9 || wb < -1e-9) continue;              // needs a negative amount: not a real mix
+      best = Math.min(best, wa*ca + wb*cb);
+    }
+  }
+  if (!isFinite(best)) return -1;                          // no combination points this way at all
+  return 100 + S - best;
+}
+var AVAIL = {}; NAMES.forEach(function(n){ AVAIL[n] = true; });
+
+/* Find recipes that land on the target color.
+     maxN   - the most units of any single ingredient
+     maxIng - the most DIFFERENT ingredients the recipe may use in total,
+              darkeners included. Three is the default: two colors and
+              something to darken them.
+
+   Colored ingredients are picked in list order, so each combination is built
+   exactly once. Two ideas keep the work small as the limit grows:
+
+     * Whatever is still to be added has to carry the leftover arrow
+       R = target - (what is in the pot so far), and pushing an arrow of length
+       |R| costs at least |R| of push, however many ingredients share the job.
+       Push is also what eats brightness, so the target's own brightness caps
+       how much of it the recipe can afford. Once the push already spent plus
+       |R| passes that cap, nothing below this branch can work and the whole
+       subtree is dropped.
+     * At the last color the leftover is pinned down: it has to point along
+       that one ingredient's hue, and the count then follows from dividing. So
+       rather than trying every count, solve for it and check its neighbors.
+
+   For a fully saturated target the arrow's length is no longer pinned (S stops
+   at 100 while the arrow can be longer), so the cap stops being a proof that
+   nothing was missed. It still admits every short recipe, and the longer ones
+   there are just the same color made with more of everything. */
+var NUMWORD = ["zero","one","two","three","four","five"];
+function search(target, maxN, maxIng){
+  maxIng = Math.max(1, Math.min(5, maxIng || 3));
+  var tg = rgb2hsv(target[0],target[1],target[2]);
+  var KEEP = 400, pool = [], cutoff = Infinity;
+  function consider(c){
+    var m = mixHSV(c), rgb = hsv2rgb(m.H,m.S,m.V), d = dist(rgb,target);
+    if (pool.length >= KEEP && d >= cutoff) return;
+    var units=0; for (var k in c){ if (Object.prototype.hasOwnProperty.call(c,k)) units+=c[k]; }
+    pool.push({counts:Object.assign({},c), rgb:rgb, d:d, units:units});
+    if (pool.length > KEEP*3){
+      pool.sort(function(p,q){ return (p.d-q.d) || (p.units-q.units); });
+      pool.length = KEEP; cutoff = pool[KEEP-1].d;
+    }
+  }
+  var COL = COLOURED.filter(function(n){ return AVAIL[n]; });
+  var DRK = DARKENERS.filter(function(n){ return AVAIL[n]; });
+  if (tg.S < 4){
+    DRK.forEach(function(dk){ for (var k=1;k<=maxN;k++){ var c={}; c[dk]=k; consider(c); } });
+  }
+  var th = tg.H*RAD, TX = tg.S*Math.cos(th), TY = tg.S*Math.sin(th);
+  var capped   = tg.S > 99;                   // at full saturation the arrow's length is not pinned
+  /* The most push that may cancel out. Cancelling and darkening both cost
+     brightness and leave hue and saturation alone, so they are interchangeable
+     for the resulting color — which means a recipe leaning on more than about
+     45 of cancellation has a tidier twin that darkens instead, and that twin
+     sorts above it anyway for using fewer units. Skipping those is what keeps
+     dark targets, where this cap would otherwise be near 100, quick. */
+  var maxLost  = 100 - tg.V + 14;
+  var maxTotal = tg.S + maxLost + (capped ? 30 : 0);
+  var budget;
+
+  /* Score a set of colored ingredients, then try to darken it into place.
+     H, S and V are passed in because the caller already has them from its
+     running totals; recomputing them here was most of the search's cost. */
+  function finish(c, ncol, H, S, V){
+    if (Math.abs(S-tg.S) > 12) return;
+    if (tg.S > 6){
+      var dh=Math.abs(H-tg.H); if (dh>180) dh=360-dh;
+      if (dh > 16) return;
+    }
+    consider(c);
+    if (V > tg.V + 0.5 && ncol < maxIng){        // a darkener needs a slot of its own
+      DRK.forEach(function(dk){
+        var k=Math.round((V-tg.V)/ING[dk][2]);
+        [k-1,k,k+1].forEach(function(kk){
+          if (kk<1 || kk>maxN) return;
+          var c2=Object.assign({},c); c2[dk]=kk;
+          consider(c2);
+        });
+      });
+    }
+  }
+  /* `c` is mutated in place and unwound on the way out, so walking the tree
+     allocates nothing; consider() takes its own copy of anything it keeps. */
+  function rec(start, c, depth, limit, total, x, y){
+    if (budget <= 0 || depth >= limit) return;
+    /* Cancelled push never shrinks: adding an arrow of length w lengthens the
+       sum by at most w, so what has already cancelled is a floor for the
+       finished recipe. It is also exactly what brightness pays for, so a branch
+       that has overspent it is dead however it is completed. Sound for every
+       target, saturated or not, and it is what does the real cutting here. */
+    if (total - Math.hypot(x,y) > maxLost) return;
+    var rx = TX-x, ry = TY-y, need = Math.hypot(rx,ry);
+    if (!capped && total + need > maxTotal) return;   // no completion can be bright enough
+    var last = (depth === limit-1) && !capped;
+    for (var i=start;i<COL.length;i++){
+      var N=COL[i], s=ING[N][1], cx=COS[N], cy=SIN[N];
+      if (last){
+        /* The leftover is pinned: it has to point along this ingredient's own
+           hue, and the count then follows from dividing. */
+        if (need < 1e-9) continue;
+        var cross = Math.abs(cx*ry - cy*rx);
+        if (cx*rx + cy*ry <= 0 || cross > need*0.45) continue;
+        var k = need/s, seenA = 0;
+        for (var q=0;q<4;q++){
+          var a = Math.floor(k) - 1 + q;
+          if (a<1 || a>maxN || a===seenA) continue;
+          seenA = a; budget--;
+          var w=s*a, nx=x+w*cx, ny=y+w*cy, nt=total+w, mg=Math.hypot(nx,ny);
+          var Hh=Math.atan2(ny,nx)/RAD; if (Hh<0) Hh+=360;
+          c[N]=a; finish(c, depth+1, Hh, mg>100?100:mg, 100-(nt-mg)); delete c[N];
+        }
+      } else {
+        for (var a2=1;a2<=maxN;a2++){
+          var w2=s*a2, nt2=total+w2;
+          if (nt2 > maxTotal) break;                  // only grows from here
+          budget--;
+          var nx2=x+w2*cx, ny2=y+w2*cy, mg2=Math.hypot(nx2,ny2);
+          var H2=Math.atan2(ny2,nx2)/RAD; if (H2<0) H2+=360;
+          c[N]=a2;
+          finish(c, depth+1, H2, mg2>100?100:mg2, 100-(nt2-mg2));   // this shorter recipe counts too
+          rec(i+1, c, depth+1, limit, nt2, nx2, ny2);
+          delete c[N];
+        }
+      }
+    }
+  }
+  /* Every single colored ingredient, swept in full and outside the push cap.
+     It is cheap, and it guarantees there is always a sensible nearest answer
+     to show even when the target's hue is one no combination can reach. */
+  COL.forEach(function(N){
+    for (var a=1;a<=maxN;a++){
+      var c={}; c[N]=a; var m=mixHSV(c); finish(c, 1, m.H, m.S, m.V);
+    }
+  });
+  if (DRK.length) maxLost = Math.min(maxLost, 45);
+  /* Two colors first, always, then straight to the full depth. Each pass gets
+     its own budget, so a depth that runs out of room can never cost an answer a
+     shallower one already found — raising the limit only ever helps. The middle
+     depths are only worth revisiting if the deep pass actually ran out. */
+  var BUD = 200000;
+  if (maxIng >= 2){
+    budget = BUD; rec(0, {}, 0, 2, 0, 0, 0);
+    if (maxIng > 2){
+      budget = BUD; rec(0, {}, 0, maxIng, 0, 0, 0);
+      if (budget <= 0){
+        for (var lim=3; lim<maxIng; lim++){ budget = BUD; rec(0, {}, 0, lim, 0, 0, 0); }
+      }
+    }
+  }
+  pool.sort(function(p,q){ return (p.d-q.d) || (p.units-q.units); });
+  var seen={}, out=[];
+  for (var z=0; z<pool.length && out.length<14; z++){
+    var r=pool[z];
+    var key=Object.keys(r.counts).sort().map(function(k){ return k+":"+r.counts[k]; }).join("|");
+    if (seen[key]) continue;
+    seen[key]=1; out.push(r);
+  }
+  return out;
+}
+function recipeText(c){
+  return Object.keys(c).sort().map(function(k){ return c[k]+" "+k; }).join(" + ");
+}
+/* A hex only pins the color down to within half a step on each channel, and the
+   ceiling can move sharply across that gap: half a degree of hue can be the
+   difference between sitting exactly on one ingredient and needing an expensive
+   pair. So test every corner of that little box, not just its center, and call
+   the color reachable if any point inside it is. Erring this way is deliberate:
+   a near miss still shows its closest recipes, while telling someone a dye they
+   just brewed is impossible is a plain wrong answer. */
+function reachCheck(rgb){
+  var best = -Infinity, bestV = 0, ok = false;
+  for (var i=0;i<8;i++){
+    var p = [ rgb[0] + (i&1 ? 0.5 : -0.5),
+              rgb[1] + (i&2 ? 0.5 : -0.5),
+              rgb[2] + (i&4 ? 0.5 : -0.5) ];
+    for (var c=0;c<3;c++) p[c] = Math.max(0, Math.min(255, p[c]));
+    var h = rgb2hsv(p[0],p[1],p[2]), v = maxValue(h.H, h.S);
+    if (v >= 0 && h.V <= v + 0.6) ok = true;
+    if (v > best){ best = v; bestV = h.V; }
+  }
+  var mid = rgb2hsv(rgb[0],rgb[1],rgb[2]), mv = maxValue(mid.H, mid.S);
+  if (mv >= 0 && mid.V <= mv + 0.6) ok = true;
+  if (mv > best){ best = mv; }
+  return { reachable: ok, vmax: best };
+}
+var lastResults = [];
+function runFind(){
+  var rgb = parseHex(document.getElementById("target").value);
+  var body = document.getElementById("findbody"), note = document.getElementById("findnote");
+  if (!rgb){
+    body.innerHTML = '<tr><td colspan="5" style="color:var(--madder)">That is not a hex color. Try something like <code>#7a4b8c</code>.</td></tr>';
+    note.textContent = ""; return;
+  }
+  document.getElementById("peek").style.background = toHex(rgb);
+  var maxN = Math.max(1, Math.min(50, parseInt(document.getElementById("maxunits").value,10) || 20));
+  var maxIng = Math.max(1, Math.min(5, parseInt(document.getElementById("maxcol").value,10) || 3));
+  var vd = document.getElementById("verdict");
+  var anyOn = NAMES.some(function(n){ return AVAIL[n]; });
+  if (!anyOn){
+    vd.innerHTML = '<div class="verdict">No ingredients are selected, so there is nothing to search. Turn some back on above.</div>';
+    body.innerHTML = ""; note.textContent = ""; return;
+  }
+  var tg = rgb2hsv(rgb[0],rgb[1],rgb[2]);
+  var chk = reachCheck(rgb), vmax = chk.vmax, reachable = chk.reachable;
+  if (!reachable){
+    vd.innerHTML = '<div class="verdict"><b>This color cannot be made.</b> '
+      + (vmax < 0
+          ? "No combination of the selected ingredients points at hue " + Math.round(tg.H) + "&deg; at all."
+          : tg.S <= 0.5
+            ? "A gray needs every trace of color gone, and there are only two ways to do that. A colorless ingredient on its own starts from a value of <b>99</b> rather than 100, and still costs its own darkening on top. Two opposite colors that cancel start from 100, but you pay for both of them. Either way the brightest gray within reach is a value of <b>" + Math.max(0,Math.round(vmax)) + "</b>, and this one needs " + Math.round(tg.V) + ". Bleaching an item is the only route back to pure white."
+            : "At hue " + Math.round(tg.H) + "&deg; and saturation " + Math.round(tg.S)
+              + ", the brightest any recipe can reach is a value of <b>" + Math.max(0,Math.round(vmax))
+              + "</b>. This color needs " + Math.round(tg.V) + "."
+              + " Reaching that saturation costs brightness, and no ingredient gives it back.")
+      + " The closest reachable colors are below.</div>";
+  } else { vd.innerHTML = ""; }
+  var t0 = (window.performance||Date).now();
+  var res = search(rgb, maxN, maxIng);
+  var ms = Math.round(((window.performance||Date).now()) - t0);
+  lastResults = res;
+  if (!res.length){
+    body.innerHTML = '<tr><td colspan="5">No one- or two-color combination lands near that. Try increasing max unit count.</td></tr>';
+    note.textContent = ""; return;
+  }
+  if (reachable && res[0].d > 14){
+    document.getElementById("verdict").innerHTML =
+      '<div class="verdict ok">This color <b>is</b> reachable in principle, but nothing close turned up. '
+      + (maxIng < 5
+          ? 'The search is limited to ' + NUMWORD[maxIng] + ' ingredient' + (maxIng>1?'s':'') + ' &mdash; allowing more may do better. '
+          : 'The search already allows five ingredients. ')
+      + 'Raising the per-item cap sometimes helps too.</div>';
+  }
+  body.innerHTML = res.map(function(r,i){
+    var hex = toHex(r.rgb);
+    var cls = r.d < 3 ? "exact" : r.d < 14 ? "close" : "near";
+    var lab = r.d < 3 ? "Exact" : r.d < 14 ? "Very close" : "Nearest";
+    return '<tr class="pick" data-r="'+i+'" title="Click to load into the mixer">'
+      + '<td><span class="tswatch" style="background:'+hex+'"></span></td>'
+      + "<td>"+recipeText(r.counts)+"</td>"
+      + '<td class="mono">'+hex+"</td>"
+      + '<td class="num">'+r.units+"</td>"
+      + '<td><span class="tag '+cls+'">'+lab+"</span></td></tr>";
+  }).join("");
+  note.textContent = "Tried every combination of up to " + NUMWORD[maxIng] + " ingredient" + (maxIng>1?"s":"")
+    + ", " + maxN + " each at most, in " + ms + " ms. Click a row to load it into the mixer.";
+}
+document.getElementById("findbody").addEventListener("click", function(e){
+  var tr = e.target.closest("tr[data-r]");
+  if (!tr) return;
+  var r = lastResults[parseInt(tr.getAttribute("data-r"),10)];
+  if (!r) return;
+  rows = Object.keys(r.counts).sort().map(function(k){ return {name:k, n:r.counts[k]}; });
+  renderRows();
+  document.getElementById("mixer").scrollIntoView({block:"start"});
+});
+/* The search runs on the UI thread, and at five ingredients that can be a
+   couple of seconds. Repaint the button first so the wait is visible rather
+   than looking like a dead click. */
+/* Show the wait on whichever button was actually pressed, and hold both for the
+   duration. The label is read back off the button rather than written in here,
+   so it restores correctly whichever one started the search. */
+function runFindBusy(who){
+  var find = document.getElementById("findbtn"), rand = document.getElementById("randhex");
+  if (find.disabled || rand.disabled) return;
+  var btn = (who === "rand") ? rand : find, label = btn.textContent;
+  btn.textContent = "Searching\u2026";
+  find.disabled = true; rand.disabled = true;
+  setTimeout(function(){
+    try { runFind(); }
+    finally { btn.textContent = label; find.disabled = false; rand.disabled = false; }
+  }, 16);
+}
+document.getElementById("findbtn").onclick = function(){ runFindBusy("find"); };
+document.getElementById("randhex").onclick = function(){
+  var hex = randomHex();
+  document.getElementById("target").value = hex;
+  document.getElementById("peek").style.background = hex;
+  runFindBusy("rand");
+};
+document.getElementById("target").addEventListener("keydown", function(e){ if (e.key === "Enter") runFindBusy("find"); });
+document.getElementById("target").addEventListener("input", function(){
+  var rgb = parseHex(document.getElementById("target").value);
+  if (rgb) document.getElementById("peek").style.background = toHex(rgb);
+});
+
+/* ---- constants table, split across two columns ---- */
+function renderConstants(){
+  var order = orderedNames(), half = Math.ceil(order.length/2);
+  [["constbodyA", order.slice(0,half)], ["constbodyB", order.slice(half)]].forEach(function(pair){
+    document.getElementById(pair[0]).innerHTML = pair[1].map(function(n){
+      var c = ING[n];
+      var dash = '<span class="dash">&mdash;</span>';
+      return '<tr><td><span class="tswatch" style="background:'+swatchCSS(n)+'"></span></td>'
+        + "<td>"+n+"</td>"
+        + '<td class="num">' + (c[1] ? c[0]+"&deg;" : dash) + "</td>"
+        + '<td class="num">' + (c[1] || dash) + "</td>"
+        + '<td class="num">' + (c[2] || dash) + "</td></tr>";
+    }).join("");
+  });
+}
+/* ---- sort toggle, shared by the mixer dropdown and the constants table ---- */
+function setSort(mode){
+  sortMode = mode;
+  [].forEach.call(document.querySelectorAll("[data-sortmode]"), function(b){
+    var on = b.getAttribute("data-sortmode") === mode;
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  renderRows(); renderConstants();
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-sortmode]");
+  if (b) setSort(b.getAttribute("data-sortmode"));
+});
+
+/* ---- ingredient filter ---- */
+function renderFilter(){
+  document.getElementById("filgrid").innerHTML = orderedNames().map(function(n){
+    return '<label class="fillab'+(AVAIL[n]?"":" off")+'">'
+      + '<input type="checkbox" data-ing="'+n+'"'+(AVAIL[n]?" checked":"")+'>'
+      + '<span class="sw" style="background:'+swatchCSS(n)+'"></span>'+n+"</label>";
+  }).join("");
+  var on = NAMES.filter(function(n){ return AVAIL[n]; }).length;
+  document.getElementById("filtercount").textContent =
+    on === NAMES.length ? "all "+NAMES.length+" in use" : on+" of "+NAMES.length+" in use";
+  document.getElementById("filtertoggle").textContent =
+    on === NAMES.length ? "Limit to ingredients I have" : "Edit my ingredients";
+}
+document.getElementById("filtertoggle").onclick = function(){
+  var panel = document.getElementById("filterpanel");
+  panel.hidden = !panel.hidden;
+  this.setAttribute("aria-expanded", panel.hidden ? "false" : "true");
+};
+document.getElementById("filterpanel").addEventListener("change", function(e){
+  var ing = e.target.getAttribute("data-ing");
+  if (!ing) return;
+  AVAIL[ing] = e.target.checked;
+  e.target.closest(".fillab").classList.toggle("off", !e.target.checked);
+  renderFilter(); runFindBusy();
+});
+document.getElementById("filterpanel").addEventListener("click", function(e){
+  var b = e.target.closest("[data-fil]");
+  if (!b) return;
+  var mode = b.getAttribute("data-fil");
+  NAMES.forEach(function(n){
+    AVAIL[n] = mode === "all" ? true : mode === "none" ? false : ING[n][1] > 0;
+  });
+  renderFilter(); runFindBusy();
+});
+
+/* ---- theme ---- */
+document.getElementById("themebtn").onclick = function(){
+  var cur = document.documentElement.getAttribute("data-theme");
+  var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+};
+
+/* ---- start: open on a random colour ---- */
+function randomHex(){
+  return "#" + Math.floor(Math.random()*0x1000000).toString(16).padStart(6,"0");
+}
+function randomRecipe(){
+  for (var attempt = 0; attempt < 60; attempt++){
+    var pool = COLOURED.slice(), pick = [], k = 2 + Math.floor(Math.random()*2);
+    for (var j = 0; j < k && pool.length; j++){
+      pick.push({name: pool.splice(Math.floor(Math.random()*pool.length),1)[0],
+                 n: 1 + Math.floor(Math.random()*8)});
+    }
+    var c = {}; pick.forEach(function(x){ c[x.name] = x.n; });
+    var m = mixHSV(c);
+    if (m.V >= 30 && m.S >= 20) return pick;      // don't open on mud or black
+  }
+  return [{name:"Cineraria Flower",n:6},{name:"Iceberry",n:2},{name:"Pansy",n:4}];
+}
+document.getElementById("lgA").style.background = swatchCSS("Raspberry");
+document.getElementById("lgB").style.background = swatchCSS("Iceberry");
+document.getElementById("lgC").style.background = swatchCSS("Acorn");
+rows = randomRecipe();
+setSort("name");
+renderFilter();                                   // renders the rows and the constants table
+var startHex = randomHex();
+document.getElementById("target").value = startHex;
+document.getElementById("peek").style.background = startHex;
+runFind();
+</script>
+</body>
+</html>
