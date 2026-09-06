@@ -2,6 +2,7 @@ Mix dyes before committing in game or find a recipe from a hex.
 
 Installation:
 Download the HI3 Dye Bench html file.
+
 Open it just like you would any other program. The file will open directly in your browser, but runs completely offline.
 
 
